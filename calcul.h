@@ -1,37 +1,35 @@
 #pragma once
-#include<iostream>
-using namespace std;
 #include"stack.h"
 #include<string>
 #include<cmath>
 template<class T>
 class TCalculator
 {
-	string expr, postfix;
+	std::string expr, postfix;
 	TStack<char> st_c;
 	TStack<double>st_d;
 	int Prior(char c); //функция
 public:
 	TCalculator() :st_c(50) {}
-	void SetExpr(string _expr);
-	string GetExpr();
-	string GetPostfix();
+	void SetExpr(std::string _expr);
+	std::string GetExpr();
+	std::string GetPostfix();
 	bool CheckBrackets() const;
 	void ToPosfix();
 	double Calc();
 };
 template<class T>
-void TCalculator<T>::SetExpr(string _expr)
+void TCalculator<T>::SetExpr(std::string _expr)
 {
 	expr = _expr;
 }
 template<class T>
-string TCalculator<T>::GetExpr()
+std::string TCalculator<T>::GetExpr()
 {
 	return expr;
 }
 template<class T>
-string TCalculator<T>::GetPostfix()
+std::string TCalculator<T>::GetPostfix()
 {
 	return postfix;
 }
@@ -63,7 +61,7 @@ int TCalculator<T>::Prior(char c)
 template<class T>
 void TCalculator<T>::ToPosfix()
 {
-	string str = "(";
+	std::string str = "(";
 	str += expr;
 	str += ")";
 	st_c.ClearSt();
