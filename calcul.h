@@ -80,6 +80,16 @@ void TCalculator<T>::ToPosfix()
 				postfix += tmp;
 				tmp = st_c.Pop();
 			}
+			if (!st_c.IsEmpty()) {
+				tmp = st_c.Pop();
+				if (tmp == 'c' || tmp == 's') {
+					postfix += ' ';
+					postfix += tmp;
+				}
+				else {
+					st_c.Push(tmp);
+				}
+			}
 		}
 		if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/' || str[i] == '^')
 		{
@@ -95,19 +105,24 @@ void TCalculator<T>::ToPosfix()
 			st_c.Push(tmp);
 			st_c.Push(str[i]);
 		}
+		if (str[i] == 'c' || str[i]=='s')
+		{
+			st_c.Push(str[i]);
+			i = i + 2;
+		}
 	}
 }
 template<class T>
 double TCalculator<T>::Calc()
 {
 	st_d.ClearSt();
-	char*tmp;
 	double rez;
 	for (int i = 0; i < postfix[i]; i++)
 	{
 		if (postfix[i] == ' ') continue;
 		if (postfix[i] >= '0'&&postfix[i] <= '9')
 		{
+			char*tmp;
 			double d = strtod(&postfix[i], &tmp);
 			int j = tmp - &postfix[i];
 			i += j - 1;
@@ -139,6 +154,14 @@ double TCalculator<T>::Calc()
 				rez = pow(op1, op2);
 			}
 			st_d.Push(rez);
+		}
+		if (postfix[i] == 's') {
+			double op=st_d.Pop();
+			rez = sin(op);
+		}
+		if (postfix[i] == 'c') {
+			double op = st_d.Pop();
+			rez = cos(op);
 		}
 	}
 	rez = st_d.Pop();
