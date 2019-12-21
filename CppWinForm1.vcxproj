@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="calcul.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack.h" />
